@@ -14,8 +14,8 @@ import SignUp from './src/screens/SignUp';
 import {Cart} from './src/screens/Cart';
 
 import {CartIcon} from './src/components/Navigation';
-
-// const Temp = () => null;
+// ICONS
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const tabStackScreenOptions = {
   headerRight: () => <CartIcon />,
@@ -45,21 +45,50 @@ const AccountStackNav = () => (
 );
 const MainTabs = createBottomTabNavigator();
 const Tabs = () => (
-  <MainTabs.Navigator screenOptions={{headerShown: false}}>
+  <MainTabs.Navigator
+    screenOptions={{
+      headerShown: false,
+      tabBarActiveTintColor: '#b55464',
+      tabBarInactiveTintColor: 'lightgray',
+      tabBarActiveBackgroundColor: '#ff7171',
+      // tabBarInactiveBackgroundColor: '#393232',
+      tabBarstyle: {
+        backgroundColor: '#a4ebf3',
+        display: 'flex',
+      },
+    }}>
     <MainTabs.Screen
       name="HomeTab"
       component={HomeStackNav}
-      options={{tabBarLabel: 'HomePage'}}
+      options={{
+        tabBarLabel: 'HomePage',
+        tabBarColor: '#694fad',
+        tabBarIcon: ({color}) => (
+          <Icon name="home" color={'#393232'} size={26} />
+        ),
+      }}
     />
     <MainTabs.Screen
       name="ExploreTab"
       component={ExploreStackNav}
-      options={{tabBarLabel: 'Explore'}}
+      options={{
+        tabBarLabel: 'Explore',
+        tabBarColor: '#694fad',
+        tabBarIcon: ({color}) => (
+          <Icon name="earth" color={'#393232'} size={26} />
+        ),
+      }}
     />
     <MainTabs.Screen
       name="AccountTab"
       component={AccountStackNav}
-      options={{tabBarLabel: 'Account'}}
+      options={{
+        tabBarLabel: 'Account',
+        tabBarColor: '#694fad',
+        tabBarIcon: ({color}) => (
+          <Icon name="person" color={'#393232'} size={26} />
+        ),
+      }}
     />
   </MainTabs.Navigator>
 );
