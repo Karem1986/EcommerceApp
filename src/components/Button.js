@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   containerOutline: {
     backgroundColor: 'transparent',
-    borderColor: colors.border,
+    borderColor: colors.brand,
   },
 
   text: {

@@ -13,7 +13,7 @@ import SignUp from './src/screens/SignUp';
 //All non default imports use curly braces:
 import {Cart} from './src/screens/Cart';
 
-import {CartIcon} from './src/components/Navigation';
+import {CartIcon, CloseIcon} from './src/components/Navigation';
 // ICONS
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -48,7 +48,7 @@ const Tabs = () => (
   <MainTabs.Navigator
     screenOptions={{
       headerShown: false,
-      tabBarActiveTintColor: '#b55464',
+      tabBarActiveTintColor: '#000',
       tabBarInactiveTintColor: 'lightgray',
       tabBarActiveBackgroundColor: '#ff7171',
       // tabBarInactiveBackgroundColor: '#393232',
@@ -117,13 +117,13 @@ function App() {
           name="Cart"
           component={Cart}
           //To display the Cart as a modal from the button to the top of the app:
-          options={{presentation: 'modal'}}
+          options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
         />
         <MainStack.Screen
           name="Auth"
           component={AuthTabs}
           //To display the sign in and sign up as a modal from the button to the top of the app:
-          options={{presentation: 'modal'}}
+          options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
         />
       </MainStack.Navigator>
     </NavigationContainer>

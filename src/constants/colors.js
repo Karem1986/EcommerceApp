@@ -5,6 +5,6 @@ export default {
   gray: '#9ca5ab',
   background: '#eef0f3',
   error: '#b55464',
-  brand: '#f04037',
+  brand: '#EC5858',
   icon: '#5f5f61',
 };
