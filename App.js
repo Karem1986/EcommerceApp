@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Button, Text, View} from 'react-native';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Home from './src/screens/Home';
@@ -20,6 +20,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const tabStackScreenOptions = {
   headerRight: () => <CartIcon />,
 };
+
+//QUERY CLIENT:
+
+const queryClient = new QueryClient();
 
 const HomeStack = createStackNavigator();
 const HomeStackNav = () => (
@@ -106,27 +110,29 @@ const MainStack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <MainStack.Navigator>
-        <MainStack.Screen
-          name="Root"
-          component={Tabs}
-          options={{headerShown: false}}
-        />
-        <MainStack.Screen
-          name="Cart"
-          component={Cart}
-          //To display the Cart as a modal from the button to the top of the app:
-          options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
-        />
-        <MainStack.Screen
-          name="Auth"
-          component={AuthTabs}
-          //To display the sign in and sign up as a modal from the button to the top of the app:
-          options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
-        />
-      </MainStack.Navigator>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <MainStack.Navigator>
+          <MainStack.Screen
+            name="Root"
+            component={Tabs}
+            options={{headerShown: false}}
+          />
+          <MainStack.Screen
+            name="Cart"
+            component={Cart}
+            //To display the Cart as a modal from the button to the top of the app:
+            options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
+          />
+          <MainStack.Screen
+            name="Auth"
+            component={AuthTabs}
+            //To display the sign in and sign up as a modal from the button to the top of the app:
+            options={{presentation: 'modal', headerLeft: () => <CloseIcon />}}
+          />
+        </MainStack.Navigator>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
