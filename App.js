@@ -22,7 +22,6 @@ const tabStackScreenOptions = {
 };
 
 //QUERY CLIENT:
-
 const queryClient = new QueryClient();
 
 const HomeStack = createStackNavigator();
