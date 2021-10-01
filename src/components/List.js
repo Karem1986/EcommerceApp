@@ -7,12 +7,12 @@ import {
   View,
   Text,
 } from 'react-native';
-
+import {money} from '../../util/format';
 export const ItemCard = ({name, price, onPress, image}) => (
   <TouchableOpacity onPress={onPress} style={styles.itemCard}>
     <Image source={{uri: image}} style={styles.itemImage} resizeMode="cover" />
     <Text style={styles.cardTitle}>{name}</Text>
-    <Text>{price}</Text>
+    <Text>{money(price)}</Text>
   </TouchableOpacity>
 );
 
