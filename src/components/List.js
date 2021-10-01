@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 export const ItemCard = ({name, price, onPress, image}) => (
-  <TouchableOpacity onPress={onPress}>
-    <Image source={{uri: image}} style={styles.itemImage}></Image>
-    <Text>{name}</Text>
+  <TouchableOpacity onPress={onPress} style={styles.itemCard}>
+    <Image source={{uri: image}} style={styles.itemImage} resizeMode="cover" />
+    <Text style={styles.cardTitle}>{name}</Text>
     <Text>{price}</Text>
   </TouchableOpacity>
 );
@@ -22,7 +22,12 @@ const styles = StyleSheet.create({
     width: screen.width * 0.4,
     height: screen.width * 0.4,
   },
-  content: {
-    paddingBottom: 100,
+  itemCard: {
+    flex: 1,
+    padding: 10,
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    marginVertical: 5,
   },
 });
