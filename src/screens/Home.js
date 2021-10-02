@@ -3,7 +3,7 @@ import React from 'react';
 import {View, SectionList, StyleSheet} from 'react-native';
 import colors from '../constants/colors';
 import {useHomeData} from '../../util/api';
-import {ItemCard} from '../components/List';
+import {ItemCard, SectionHeader, SectionFooter} from '../components/List';
 import {Loading} from '../components/Loading';
 
 export default function Home({navigation}) {
@@ -27,9 +27,15 @@ export default function Home({navigation}) {
       renderItem={({item}) => {
         console.log('item', item);
         return (
-          <ItemCard {...item} onPress={() => navigation.push('Details')} />
+          <View style={{backgroundColor: '#fff'}}>
+            <ItemCard {...item} onPress={() => navigation.push('Details')} />
+          </View>
         );
       }}
+      renderSectionHeader={({section}) => (
+        <SectionHeader>{section.title}</SectionHeader>
+      )}
+      renderSectionFooter={() => <SectionFooter />}
     />
   );
 }
