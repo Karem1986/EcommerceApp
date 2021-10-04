@@ -24,11 +24,21 @@ export default function Home({navigation}) {
       style={styles.sectionList}
       contentContainerStyle={styles.content}
       sections={sections}
-      renderItem={({item}) => {
-        console.log('item', item);
+      renderItem={({section, index}) => {
+        if (index % 2 !== 0) return null;
+        const item = section.data[index];
+        const nextItem = section.data[index + 1];
         return (
-          <View style={{backgroundColor: '#fff'}}>
+          <View style={{backgroundColor: '#fff', flexDirection: 'row'}}>
             <ItemCard {...item} onPress={() => navigation.push('Details')} />
+            {nextItem ? (
+              <ItemCard
+                {...nextItem}
+                onPress={() => navigation.push('Details')}
+              />
+            ) : (
+              <View style={{flex: 1}} />
+            )}
           </View>
         );
       }}
@@ -36,6 +46,7 @@ export default function Home({navigation}) {
         <SectionHeader>{section.title}</SectionHeader>
       )}
       renderSectionFooter={() => <SectionFooter />}
+      stickySectionHeadersEnabled={false}
     />
   );
 }
