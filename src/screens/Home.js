@@ -7,7 +7,7 @@ import {ProductList} from '../components/List';
 import {Loading} from '../components/Loading';
 
 export default function Home() {
-  const {isLoading, data, error} = useHomeData();
+  const {isLoading, data} = useHomeData();
   if (isLoading) {
     return <Loading />;
   }
