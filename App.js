@@ -28,7 +28,13 @@ const HomeStack = createStackNavigator();
 const HomeStackNav = () => (
   <HomeStack.Navigator screenOptions={tabStackScreenOptions}>
     <HomeStack.Screen name="Home" component={Home} />
-    <HomeStack.Screen name="Details" component={ProductDetails} />
+    <HomeStack.Screen
+      name="Details"
+      component={ProductDetails}
+      options={({route}) => ({
+        title: route.params.name,
+      })}
+    />
   </HomeStack.Navigator>
 );
 
