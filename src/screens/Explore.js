@@ -10,7 +10,7 @@ export default function Explore() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log('DATA', data);
+  // console.log('DATA', data);
   const sections = data?.categories?.map(category => {
     return {
       ...category,
