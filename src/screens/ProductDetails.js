@@ -1,5 +1,6 @@
 import React from 'react';
 import {ScrollView, View, Image, StyleSheet} from 'react-native';
+import {useCart} from '../../util/cart';
 
 import {Text} from '../components/Text';
 import colors from '../constants/colors';
@@ -11,7 +12,13 @@ export default function ProductDetails({route}) {
   // console.log('Route', route.params);
   const staticData = route.params;
   const {data, isSuccess} = useDetailData({id: route.params.id});
+  const cart = useCart(state => ({
+    quantity: state.cart[route.params.id]?.quantity || 0,
+    addItem: state.addItem,
+    removeItem: state.removeItem,
+  }));
 
+  // console.log('CART', cart); //test first in the console if the product is added to the cart.
   let {name, price, description, review, image, soldCount} = staticData;
   if (isSuccess) {
     image = data.data.image;
@@ -52,9 +59,11 @@ export default function ProductDetails({route}) {
 
       <QuantityCounter
         price={price}
-        quantity={0}
-        onDecrement={() => console.log('TODO Decrement')}
-        onIncrement={() => console.log('TODO Increment')}
+        quantity={cart.quantity}
+        onDecrement={() => cart.removeItem(route.params.id)}
+        onIncrement={() =>
+          cart.addItem({id: route.params.id, name, price, image})
+        }
       />
     </>
   );
