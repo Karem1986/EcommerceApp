@@ -3,7 +3,7 @@ import {View, StyleSheet, Image} from 'react-native';
 
 import {Text} from '../components/Text';
 import {money} from '../../util/format';
-// import {Counter} from './QuantityCounter';
+import {Counter} from './QuantityCounter';
 
 export const CartRow = ({name, quantity, price, image}) => {
   return (
@@ -13,8 +13,7 @@ export const CartRow = ({name, quantity, price, image}) => {
         <Text>{money(price)}</Text>
         <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
       </View>
-      <Text>{quantity}</Text>
-      {/* <Counter quantity={quantity} type="small" /> */}
+      <Counter quantity={quantity} type="small" />
     </View>
   );
 };
@@ -28,8 +27,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   image: {
-    width: 145,
-    height: 140,
-    marginRight: 10,
+    width: 125,
+    height: 120,
+    marginRight: 7,
   },
 });
