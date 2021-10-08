@@ -2,6 +2,17 @@ import create from 'zustand';
 import {persist} from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+//Show cart quantity in the header:
+export const cartQuantity = cart => {
+  let quantity = 0;
+
+  Object.keys(cart).forEach(id => {
+    const item = cart[id]; //Quantity updates based on the id
+    quantity += item.quantity;
+  });
+  return quantity;
+};
+
 //function to calculate the cart total:
 export const cartTotal = cart => {
   let total = 0;
