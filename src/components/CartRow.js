@@ -4,16 +4,32 @@ import {View, StyleSheet, Image} from 'react-native';
 import {Text} from '../components/Text';
 import {money} from '../../util/format';
 import {Counter} from './QuantityCounter';
+import {useCart} from '../../util/cart';
 
-export const CartRow = ({name, quantity, price, image}) => {
+export const CartRow = ({id}) => {
+  const {addItem, removeItem, item} = useCart(state => ({
+    addItem: state.addItem,
+    removeItem: state.removeItem,
+    item: state.cart[id],
+  }));
+
   return (
     <View style={styles.row}>
       <View>
-        <Text style={{fontWeight: 'bold'}}>{name}</Text>
-        <Text>{money(price)}</Text>
-        <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+        <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
+        <Text>{money(item.price)}</Text>
+        <Image
+          source={{uri: item.image}}
+          style={styles.image}
+          resizeMode="cover"
+        />
       </View>
-      <Counter quantity={quantity} type="small" />
+      <Counter
+        quantity={item.quantity}
+        type="small"
+        onDecrement={() => removeItem(id)}
+        onIncrement={() => addItem(item)}
+      />
     </View>
   );
 };

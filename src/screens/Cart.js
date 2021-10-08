@@ -2,14 +2,14 @@ import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 
 import {Text} from '../components/Text';
+import {money} from '../../util/format';
 import colors from '../constants/colors';
-import {useCart} from '../../util/cart';
+import {useCart, cartTotal} from '../../util/cart';
 import {CartRow} from '../components/CartRow';
 
 export const Cart = () => {
   const {cart} = useCart(state => ({cart: state.cart}));
 
-  console.log('cart', cart);
   const isEmpty = Object.keys(cart).length === 0;
 
   if (isEmpty) {
@@ -23,19 +23,15 @@ export const Cart = () => {
   }
   return (
     <ScrollView style={{backgroundColor: colors.white}}>
-      {Object.keys(cart).map(id => {
-        const item = cart[id];
-
-        return (
-          <CartRow
-            key={id}
-            name={item.name}
-            price={item.price}
-            image={item.image}
-            quantity={item.quantity}
-          />
-        );
-      })}
+      {Object.keys(cart).map(id => (
+        <CartRow key={id} id={id} />
+      ))}
+      <View style={styles.summaryContainer}>
+        <Text>
+          <Text style={{fontWeight: 'bold'}}>Total: </Text>
+          {money(cartTotal(cart))}
+        </Text>
+      </View>
     </ScrollView>
   );
 };
@@ -46,5 +42,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
     paddingTop: 60,
+  },
+  summaryContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    borderTopColor: colors.border,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
 });
